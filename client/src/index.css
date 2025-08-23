@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@import 'react-toastify/dist/ReactToastify.css';
+
+/* Custom toast styles */
+.custom-toast {
+  background-color: #000000 !important; /* Changed to black */
+  border: 1px solid #404040 !important;
+  border-radius: 8px !important;
+  color: #d4d4d4 !important;
+  font-family: 'mono', monospace !important;
+  font-size: 14px !important;
+}
+
+/* Force override ALL toast icons with higher specificity */
+.Toastify__toast-container .Toastify__toast .Toastify__toast-icon {
+  color: #d4d4d4 !important;
+}
+
+.Toastify__toast-container .Toastify__toast--error .Toastify__toast-icon {
+  color: #d4d4d4 !important;
+}
+
+.Toastify__toast-container .Toastify__toast--warning .Toastify__toast-icon {
+  color: #d4d4d4 !important;
+}
+
+.Toastify__toast-container .Toastify__toast--success .Toastify__toast-icon {
+  color: #d4d4d4 !important;
+}
+
+.Toastify__toast-container .Toastify__toast--info .Toastify__toast-icon {
+  color: #d4d4d4 !important;
+}
+
+/* Target SVG icons specifically */
+.Toastify__toast-icon svg {
+  fill: #d4d4d4 !important;
+  color: #d4d4d4 !important;
+}
+
+/* Also target the toast background directly */
+.Toastify__toast {
+  background-color: #000000 !important;
+}
+
+.Toastify__toast--error {
+  background-color: #000000 !important;
+}
+
+.Toastify__toast--warning {
+  background-color: #000000 !important;
+}
+
+.Toastify__toast--success {
+  background-color: #000000 !important;
+}
+
+.Toastify__toast--info {
+  background-color: #000000 !important;
+}
+
+.Toastify__toast-container {
+  width: auto !important;
+  max-width: 400px !important;
+}
