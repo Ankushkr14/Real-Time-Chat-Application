@@ -22,8 +22,6 @@ export default function App() {
   const [roomId, setRoomId] = useState<string>("");
   const [userCount, setUserCount] = useState<number>(0);
 
-  const [copied, setCopied] = useState<boolean>(false);
-
   const wsRef = useRef<WebSocket | null>(null);
 
   useEffect(() => {
@@ -138,8 +136,6 @@ export default function App() {
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
 
       toast.success("Room code copied to clipboard")
     } catch (error) {
