@@ -95,7 +95,7 @@ export default function App() {
     }
 
 
-  }, [username])
+  }, [])
 
 
   const sentMessages = () => {
