@@ -82,7 +82,8 @@ wss.on("connection", (socket) => {
                         client.send(JSON.stringify({
                             type: "user-count-update",
                             payload: {
-                                userCount
+                                userCount,
+                                userJoined: username
                             }
                         }));
                     }

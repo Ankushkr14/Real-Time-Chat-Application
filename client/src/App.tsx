@@ -25,7 +25,9 @@ export default function App() {
   const wsRef = useRef<WebSocket | null>(null);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8080");
+
+    const wsURL = import.meta.env.VITE_BACKEND_URL;
+    const ws = new WebSocket(wsURL);
 
 
 
@@ -66,26 +68,34 @@ export default function App() {
           }]);
         } else if (data.type === "room-not-found") {
           toast.error("Room not found");
-        } else if (data.type === "disconnect") {
+        } else if (data.type === "disconnected") {
           toast.info("Left the room")
         }
 
       } catch (error) {
-        setMessages(m => [...m, e.data]);
+        setMessages(m => [...m, { username: "System", message: e.data }]);
       }
     }
 
     wsRef.current = ws;
 
-    ws.onopen = () => {
-      console.log("started")
+    ws.onclose = () => {
+      if (joined) {
+        toast.warn("Disconnected from server");
+      }
+    }
+
+    ws.onerror = (error) => {
+      console.log("WebSocket error:", error);
+      toast.error("Server Error");
     }
 
     return () => {
       ws.close();
     }
 
-  }, [])
+
+  }, [username])
 
 
   const sentMessages = () => {
@@ -98,11 +108,14 @@ export default function App() {
           username
         }
       }))
-    }
-    if (inputRef.current) {
-      inputRef.current.value = '';
+      if (inputRef.current) {
+        inputRef.current.value = '';
+      }
+    } else {
+      toast.warn("Please type a message");
     }
   }
+
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       sentMessages();
